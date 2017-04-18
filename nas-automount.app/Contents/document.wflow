@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>428</string>
+	<key>AMApplicationVersion</key>
+	<string>2.7</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run AppleScript.action</string>
+				<key>ActionName</key>
+				<string>Run AppleScript</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>source</key>
+					<string>on run {input, parameters}		-- create script path	set current_path to POSIX path of (path to me)	set app_bash_script to current_path &amp; "Contents/Resources/nas-autmount.sh"		-- check if username and password is set in bash script and prompt user if needed (when found)	set user_name to ""	try		do shell script "grep -c '$username' " &amp; app_bash_script		-- no error means "$username" is found, so prompt is needed		display dialog "username ?" default answer ""		set user_name to text returned of result	on error		-- meaning $username is not found, so no prompt needed, do nothing.	end try		set pass_word to ""	try		do shell script "grep -c '$password' " &amp; app_bash_script		-- no error means "$password" is found, so prompt is needed		display dialog "password ?" default answer ""		set pass_word to text returned of result	on error		-- meaning $password is not found, so no prompt needed, do nothing.	end try		-- run the embedded bash script (as root), pass args if available	if (user_name is not "" and pass_word is not "") then		set bash_script to "bash " &amp; app_bash_script &amp; " -u " &amp; user_name &amp; " -p " &amp; pass_word	else if user_name is not "" then		set bash_script to "bash " &amp; app_bash_script &amp; " -u " &amp; user_name	else if pass_word is not "" then		set bash_script to "bash " &amp; app_bash_script &amp; " -p " &amp; pass_word	else		set bash_script to "bash " &amp; app_bash_script	end if	do shell script bash_script with administrator privileges		return inputend run</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.RunScript</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunScriptAction</string>
+				<key>InputUUID</key>
+				<string>439C50BF-17BF-4FF8-9681-225E1439D9BC</string>
+				<key>Keywords</key>
+				<array>
+					<string>Run</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>9AB42F19-775A-47EB-880B-16B837C431A7</string>
+				<key>UUID</key>
+				<string>D2E7316C-76E2-445B-91B0-73B994E60EB7</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string>on run {input, parameters}
+	
+	(* Your script goes here *)
+	
+	return input
+end run</string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>341.000000:866.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict/>
+	<key>variables</key>
+	<array>
+		<dict>
+			<key>UUID</key>
+			<string>BF1F3ED6-E0B0-4365-BA44-3502F0DF34A8</string>
+			<key>identifier</key>
+			<string>com.apple.Automator.Variable.Text</string>
+			<key>name</key>
+			<string>password</string>
+			<key>value</key>
+			<string>d</string>
+		</dict>
+		<dict>
+			<key>UUID</key>
+			<string>3CFFCC4C-81AC-43C9-B4F3-BA5874648CDF</string>
+			<key>identifier</key>
+			<string>com.apple.Automator.Variable.Text</string>
+			<key>name</key>
+			<string>username</string>
+			<key>value</key>
+			<string>a</string>
+		</dict>
+	</array>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.application</string>
+	</dict>
+</dict>
+</plist>
