@@ -18,12 +18,13 @@ It uses a JSON file as input to get the list of shares accessible by 1 or more u
 
 	```
 	{
-	    "name": "Share 1",
+	    "name": "Share-1",
 	    "protocol": "smb",
 	    "server": "nas.example.com",
 	    "path": "share-1"
 	}
 	```
+	*Note : avoid space in share name.*
 
 	Optionally a login/password can be set (per share) but it is not recommended (password are stored in clear).
 
