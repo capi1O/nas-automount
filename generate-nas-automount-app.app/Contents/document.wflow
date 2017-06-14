@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>428</string>
+	<key>AMApplicationVersion</key>
+	<string>2.7</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run AppleScript.action</string>
+				<key>ActionName</key>
+				<string>Run AppleScript</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>source</key>
+					<string>on run --{input, parameters}		-- get current directory path (where this app is run)	tell application "Finder"		set currentFolderUnixPath to POSIX path of (parent of (path to me) as string)		log currentFolderUnixPath	end tell		-- ask for a name for the generated app	display dialog "choose name" default answer ""	set userName to text returned of the result		-- copy the template app	tell application "Finder"		set currentFolderPosixPath to POSIX file currentFolderUnixPath as Unicode text		set templatePosixPath to POSIX file (currentFolderUnixPath &amp; "nas-automount-template.app") as Unicode text		set tempFolderPosixPath to (make new folder at currentFolderPosixPath with properties {name:((random number from 0 to 100000) as string)}) as string		set tempFilePosixPath to duplicate templatePosixPath to tempFolderPosixPath with replacing		set appName to "nas-automount-" &amp; userName &amp; ".app"		set name of tempFilePosixPath to appName		--set appFile to POSIX file ((tempFolder &amp; appName) as Unicode text)		set appFilePosixPath to tempFolderPosixPath &amp; appName		log appFilePosixPath		move appFilePosixPath to currentFolderPosixPath with replacing		delete tempFolderPosixPath	end tell		-- create app bash script path from current dir	set app_bash_script to currentFolderUnixPath &amp; appName &amp; "/Contents/Resources/nas-automount.sh"		return app_bash_scriptend run</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.RunScript</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunScriptAction</string>
+				<key>InputUUID</key>
+				<string>256E55C5-C577-4771-B0F9-2CD44FCD744E</string>
+				<key>Keywords</key>
+				<array>
+					<string>Run</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>30FA7771-622C-4CAE-9F53-AC371D47458E</string>
+				<key>UUID</key>
+				<string>E1C0522A-F7C8-4C0D-9786-4636DC39A08D</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string>on run {input, parameters}
+	
+	(* Your script goes here *)
+	
+	return input
+end run</string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>761.500000:607.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>2.0.3</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<dict/>
+					<key>CheckedForUserDefaultShell</key>
+					<dict/>
+					<key>inputMethod</key>
+					<dict/>
+					<key>shell</key>
+					<dict/>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run Shell Script.action</string>
+				<key>ActionName</key>
+				<string>Run Shell Script</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<string>#! /bin/bash
+
+# path to embedded bash script (into nas-automount.app)
+app_bash_script=$1
+
+# clear or create embedded bash script
+&gt; $app_bash_script
+
+# add lines to get username &amp; password (if needed) as options
+echo 'while getopts ":u:p:" opt; do' &gt;&gt; $app_bash_script
+echo '	case $opt in' &gt;&gt; $app_bash_script
+echo '		u) username="$OPTARG"' &gt;&gt; $app_bash_script
+echo '		;;' &gt;&gt; $app_bash_script
+echo '		p) password="$OPTARG"' &gt;&gt; $app_bash_script
+echo '		;;' &gt;&gt; $app_bash_script
+echo '		\?)' &gt;&gt; $app_bash_script
+echo '		echo "Invalid option: -$OPTARG" &gt;&amp;2' &gt;&gt; $app_bash_script
+echo '		;;' &gt;&gt; $app_bash_script
+echo '	esac' &gt;&gt; $app_bash_script
+echo 'done' &gt;&gt; $app_bash_script
+
+
+# add line to add one line to /etc/auto_master file
+echo 'echo "/mnt/nas		auto_nas" &gt;&gt; /etc/auto_master' &gt;&gt; $app_bash_script
+
+# for each share defined in shares.json file add a line to add a line to /etc/auto_nas
+jq -r '.[] | ("echo \"" + .name + " -fstype=" + .protocol + " '"'"'" + .protocol + "://" + (.username // "$username") + ":" + (.password // "$password") +"@" + .server + "/" + .path + "'"'"'\" &gt;&gt; /etc/auto_nas")' shares.json &gt;&gt; $app_bash_script
+
+# add lines to make auto_nas file root-only
+echo 'chown root /etc/auto_nas' &gt;&gt; $app_bash_script
+echo 'chmod 600 /etc/auto_nas' &gt;&gt; $app_bash_script
+
+# add line to create mount directory
+echo 'mkdir -p /mnt/nas' &gt;&gt; $app_bash_script
+
+# add line to mount the shares
+echo 'automount -vc' &gt;&gt; $app_bash_script
+</string>
+					<key>CheckedForUserDefaultShell</key>
+					<true/>
+					<key>inputMethod</key>
+					<integer>1</integer>
+					<key>shell</key>
+					<string>/bin/bash</string>
+					<key>source</key>
+					<string></string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.RunShellScript</string>
+				<key>CFBundleVersion</key>
+				<string>2.0.3</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunShellScriptAction</string>
+				<key>InputUUID</key>
+				<string>8EF600D6-E777-4A91-BC57-37253E6C7C42</string>
+				<key>Keywords</key>
+				<array>
+					<string>Shell</string>
+					<string>Script</string>
+					<string>Command</string>
+					<string>Run</string>
+					<string>Unix</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>A0E5AAF3-3715-4264-BC65-ABDB53319AC0</string>
+				<key>UUID</key>
+				<string>63FC2449-3DC9-40B2-AF20-CF4F55F57465</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>inputMethod</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>CheckedForUserDefaultShell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>COMMAND_STRING</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>/bin/sh</string>
+						<key>name</key>
+						<string>shell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>761.500000:1221.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict>
+		<key>E93514A1-46E6-418F-84C3-D75F7A34D18D</key>
+		<dict>
+			<key>from</key>
+			<string>E1C0522A-F7C8-4C0D-9786-4636DC39A08D - E1C0522A-F7C8-4C0D-9786-4636DC39A08D</string>
+			<key>to</key>
+			<string>63FC2449-3DC9-40B2-AF20-CF4F55F57465 - 63FC2449-3DC9-40B2-AF20-CF4F55F57465</string>
+		</dict>
+	</dict>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.application</string>
+	</dict>
+</dict>
+</plist>
