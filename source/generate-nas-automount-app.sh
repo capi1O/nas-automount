@@ -1,8 +1,8 @@
 #! /bin/bash
-
+base_path="${1}"
 # path to embedded bash script (into nas-automount.app)
-app_bash_script=$1
-
+app_bash_script="${base_path}nas-automount.app/Contents/Resources/nas-automount.sh"
+shares_json="${base_path}shares.json"
 # clear or create embedded bash script
 > $app_bash_script
 

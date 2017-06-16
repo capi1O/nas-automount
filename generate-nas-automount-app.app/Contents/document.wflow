@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run --{input, parameters}		-- get current directory path (where this app is run)	tell application "Finder"		set currentFolderUnixPath to POSIX path of (parent of (path to me) as string)		log currentFolderUnixPath	end tell		-- ask for a name for the generated app	display dialog "choose name" default answer ""	set userName to text returned of the result		-- copy the template app	tell application "Finder"		set currentFolderPosixPath to POSIX file currentFolderUnixPath as Unicode text		set templatePosixPath to POSIX file (currentFolderUnixPath &amp; "nas-automount-template.app") as Unicode text		set tempFolderPosixPath to (make new folder at currentFolderPosixPath with properties {name:((random number from 0 to 100000) as string)}) as string		set tempFilePosixPath to duplicate templatePosixPath to tempFolderPosixPath with replacing		set appName to "nas-automount-" &amp; userName &amp; ".app"		set name of tempFilePosixPath to appName		--set appFile to POSIX file ((tempFolder &amp; appName) as Unicode text)		set appFilePosixPath to tempFolderPosixPath &amp; appName		log appFilePosixPath		move appFilePosixPath to currentFolderPosixPath with replacing		delete tempFolderPosixPath	end tell		-- create app bash script path from current dir	set app_bash_script to currentFolderUnixPath &amp; appName &amp; "/Contents/Resources/nas-automount.sh"		return app_bash_scriptend run</string>
+					<string>on run --{input, parameters}		-- get current directory path (where this app is run)	tell application "Finder"		set currentFolderUnixPath to POSIX path of (parent of (path to me) as string)		log currentFolderUnixPath	end tell		-- ask for a name for the generated app	display dialog "choose name" default answer ""	set userName to text returned of the result		-- copy the template app	tell application "Finder"		set currentFolderPosixPath to POSIX file currentFolderUnixPath as Unicode text		set templatePosixPath to POSIX file (currentFolderUnixPath &amp; "nas-automount-template.app") as Unicode text		set tempFolderPosixPath to (make new folder at currentFolderPosixPath with properties {name:((random number from 0 to 100000) as string)}) as string		set tempFilePosixPath to duplicate templatePosixPath to tempFolderPosixPath with replacing		set appName to "nas-automount-" &amp; userName &amp; ".app"		set name of tempFilePosixPath to appName		--set appFile to POSIX file ((tempFolder &amp; appName) as Unicode text)		set appFilePosixPath to tempFolderPosixPath &amp; appName		log appFilePosixPath		move appFilePosixPath to currentFolderPosixPath with replacing		delete tempFolderPosixPath	end tell		return currentFolderUnixPathend run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -105,7 +105,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>761.500000:607.000000</string>
+				<string>761.500000:995.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -162,10 +162,10 @@ end run</string>
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>#! /bin/bash
-
+base_path="${1}"
 # path to embedded bash script (into nas-automount.app)
-app_bash_script=$1
-
+app_bash_script="${base_path}nas-automount.app/Contents/Resources/nas-automount.sh"
+shares_json="${base_path}shares.json"
 # clear or create embedded bash script
 &gt; $app_bash_script
 
@@ -197,8 +197,7 @@ echo 'chmod 600 /etc/auto_nas' &gt;&gt; $app_bash_script
 echo 'mkdir -p /mnt/nas' &gt;&gt; $app_bash_script
 
 # add line to mount the shares
-echo 'automount -vc' &gt;&gt; $app_bash_script
-</string>
+echo 'automount -vc' &gt;&gt; $app_bash_script</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
@@ -311,7 +310,7 @@ echo 'automount -vc' &gt;&gt; $app_bash_script
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>761.500000:1221.000000</string>
+				<string>761.500000:1677.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -321,7 +320,7 @@ echo 'automount -vc' &gt;&gt; $app_bash_script
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>E93514A1-46E6-418F-84C3-D75F7A34D18D</key>
+		<key>0EDED9EC-E8E1-4CBA-B8F0-6CB1754AD9DE</key>
 		<dict>
 			<key>from</key>
 			<string>E1C0522A-F7C8-4C0D-9786-4636DC39A08D - E1C0522A-F7C8-4C0D-9786-4636DC39A08D</string>
