@@ -1,11 +1,14 @@
 #! /bin/bash
 
-# get username & password (if needed) as options
-while getopts ":u:p:" opt; do
+# get username & password (if needed) and shortcut value as options
+create_shortcuts=true
+while getopts ":u:p:s" opt; do
 	case $opt in
 		u) username="$OPTARG"
 		;;
 		p) password="$OPTARG"
+		;;
+		s) create_shortcuts=true
 		;;
 		\?)
 		echo "Invalid option: -$OPTARG" >&2
@@ -31,3 +34,12 @@ mkdir -p /mnt/nas
 
 # mount the shares
 automount -vc
+
+# add shortcuts to Finder sidebar
+if [ "${create_shortcuts}" = true ]
+then
+	:
+	sfltool add-item com.apple.LSSharedFileList.FavoriteItems 'file:///mnt/nas/Time-Machine'
+	sfltool add-item com.apple.LSSharedFileList.FavoriteItems 'file:///mnt/nas/Share-1'
+	sfltool add-item com.apple.LSSharedFileList.FavoriteItems 'file:///mnt/nas/Share-2'
+fi
