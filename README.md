@@ -19,6 +19,7 @@ It uses a JSON file as input to get the list of shares accessible by 1 or more u
 	```
 	{
 	    "name": "Share-1",
+			"fstype": "smbfs",
 	    "protocol": "smb",
 	    "server": "nas.example.com",
 	    "path": "share-1"

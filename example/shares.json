@@ -2,12 +2,14 @@
 	{
 		"name": "Time-Machine",
 		"protocol": "afp",
+		"fstype": "afp",
 		"server": "nas.example.com",
 		"path": "time machine"
 	},
 	{
 		"name": "Share-1",
 		"protocol": "afp",
+		"fstype": "afp",
 		"server": "nas.example.com",
 		"path": "share-1",
 		"username": "user",
@@ -16,6 +18,7 @@
 	{
 		"name": "Share-2",
 		"protocol": "smb",
+		"fstype": "smbfs",
 		"server": "nas.example.com",
 		"path": "share-2"
 	}
