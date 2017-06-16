@@ -1,14 +1,20 @@
 #! /bin/bash
+
+# get arguments
 base_path="${1}"
 # path to embedded bash script (into nas-automount.app)
 app_bash_script="${base_path}nas-automount.app/Contents/Resources/nas-automount.sh"
+# path to shares.json
 shares_json="${base_path}shares.json"
-
 # get force_shortcuts value
 force_shortcuts="${2}"
 
 # clear or create embedded bash script
 > $app_bash_script
+
+# add missing paths to PATH env
+source ~/.bash_profile
+export PATH=/usr/local/bin:$PATH
 
 # add lines to set the desired behavior to add shortcuts to shares in Finder sidebar
 # if force_shortcuts set, shortcuts will be created.

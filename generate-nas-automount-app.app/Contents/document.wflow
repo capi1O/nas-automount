@@ -712,16 +712,22 @@ end run</string>
 				<dict>
 					<key>COMMAND_STRING</key>
 					<string>#! /bin/bash
+
+# get arguments
 base_path="${1}"
 # path to embedded bash script (into nas-automount.app)
 app_bash_script="${base_path}nas-automount.app/Contents/Resources/nas-automount.sh"
+# path to shares.json
 shares_json="${base_path}shares.json"
-
 # get force_shortcuts value
 force_shortcuts="${2}"
 
 # clear or create embedded bash script
 &gt; $app_bash_script
+
+# add missing paths to PATH env
+source ~/.bash_profile
+export PATH=/usr/local/bin:$PATH
 
 # add lines to set the desired behavior to add shortcuts to shares in Finder sidebar
 # if force_shortcuts set, shortcuts will be created.
@@ -765,7 +771,7 @@ echo 'mkdir -p /mnt/nas' &gt;&gt; $app_bash_script
 # add line to mount the shares
 echo 'automount -vc' &gt;&gt; $app_bash_script
 
-# add a shortcut to Finder sidebar
+# add shortcuts to Finder sidebar
 echo 'if [ "${create_shortcuts}" = true ]' &gt;&gt; $app_bash_script
 echo 'then' &gt;&gt; $app_bash_script
 echo '	:' &gt;&gt; $app_bash_script
