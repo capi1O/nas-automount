@@ -723,7 +723,7 @@ shares_json="${base_path}shares.json"
 force_shortcuts="${2}"
 
 # clear or create embedded bash script
-&gt; $app_bash_script
+&gt; "${app_bash_script}"
 
 # add missing paths to PATH env
 source ~/.bash_profile
@@ -734,49 +734,49 @@ export PATH=/usr/local/bin:$PATH
 # if force_shortcuts not set, user will be asked if he wants to create shortcuts or not.
 if [ "${force_shortcuts}" = true ]
 then
-	echo 'create_shortcuts=true' &gt;&gt; $app_bash_script
+	echo 'create_shortcuts=true' &gt;&gt; "${app_bash_script}"
 else
-	echo 'create_shortcuts=false' &gt;&gt; $app_bash_script
+	echo 'create_shortcuts=false' &gt;&gt; "${app_bash_script}"
 fi
 
 # add lines to get username &amp; password (if needed) and shortcut value as options
-echo 'while getopts ":u:p:s" opt; do' &gt;&gt; $app_bash_script
-echo '	case $opt in' &gt;&gt; $app_bash_script
-echo '		u) username="$OPTARG"' &gt;&gt; $app_bash_script
-echo '		;;' &gt;&gt; $app_bash_script
-echo '		p) password="$OPTARG"' &gt;&gt; $app_bash_script
-echo '		;;' &gt;&gt; $app_bash_script
-echo '		s) create_shortcuts=true' &gt;&gt; $app_bash_script
-echo '		;;' &gt;&gt; $app_bash_script
-echo '		\?)' &gt;&gt; $app_bash_script
-echo '		echo "Invalid option: -$OPTARG" &gt;&amp;2' &gt;&gt; $app_bash_script
-echo '		;;' &gt;&gt; $app_bash_script
-echo '	esac' &gt;&gt; $app_bash_script
-echo 'done' &gt;&gt; $app_bash_script
+echo 'while getopts ":u:p:s" opt; do' &gt;&gt; "${app_bash_script}"
+echo '	case $opt in' &gt;&gt; "${app_bash_script}"
+echo '		u) username="$OPTARG"' &gt;&gt; "${app_bash_script}"
+echo '		;;' &gt;&gt; "${app_bash_script}"
+echo '		p) password="$OPTARG"' &gt;&gt; "${app_bash_script}"
+echo '		;;' &gt;&gt; "${app_bash_script}"
+echo '		s) create_shortcuts=true' &gt;&gt; "${app_bash_script}"
+echo '		;;' &gt;&gt; "${app_bash_script}"
+echo '		\?)' &gt;&gt; "${app_bash_script}"
+echo '		echo "Invalid option: -$OPTARG" &gt;&amp;2' &gt;&gt; "${app_bash_script}"
+echo '		;;' &gt;&gt; "${app_bash_script}"
+echo '	esac' &gt;&gt; "${app_bash_script}"
+echo 'done' &gt;&gt; "${app_bash_script}"
 
 
 # add line to add one line to /etc/auto_master file
-echo 'echo "/mnt/nas		auto_nas" &gt;&gt; /etc/auto_master' &gt;&gt; $app_bash_script
+echo 'echo "/mnt/nas		auto_nas" &gt;&gt; /etc/auto_master' &gt;&gt; "${app_bash_script}"
 
 # for each share defined in shares.json file add a line to add a line to /etc/auto_nas
-jq -r '.[] | ("echo \"" + .name + " -fstype=" + .fstype + " \\\"" + .protocol + "://" + (.username // "$username") + ":" + (.password // "$password") +"@" + .server + "/" + .path + "\\\"\" &gt;&gt; /etc/auto_nas")' "${shares_json}" &gt;&gt; $app_bash_script
+jq -r '.[] | ("echo \"" + .name + " -fstype=" + .fstype + " \\\"" + .protocol + "://" + (.username // "$username") + ":" + (.password // "$password") +"@" + .server + "/" + .path + "\\\"\" &gt;&gt; /etc/auto_nas")' "${shares_json}" &gt;&gt; "${app_bash_script}"
 # add lines to make auto_nas file root-only
-echo 'chown root /etc/auto_nas' &gt;&gt; $app_bash_script
-echo 'chmod 600 /etc/auto_nas' &gt;&gt; $app_bash_script
+echo 'chown root /etc/auto_nas' &gt;&gt; "${app_bash_script}"
+echo 'chmod 600 /etc/auto_nas' &gt;&gt; "${app_bash_script}"
 
 # add line to create mount directory
-echo 'mkdir -p /mnt/nas' &gt;&gt; $app_bash_script
+echo 'mkdir -p /mnt/nas' &gt;&gt; "${app_bash_script}"
 
 # add line to mount the shares
-echo 'automount -vc' &gt;&gt; $app_bash_script
+echo 'automount -vc' &gt;&gt; "${app_bash_script}"
 
 # add shortcuts to Finder sidebar
-echo 'if [ "${create_shortcuts}" = true ]' &gt;&gt; $app_bash_script
-echo 'then' &gt;&gt; $app_bash_script
-echo '	:' &gt;&gt; $app_bash_script
+echo 'if [ "${create_shortcuts}" = true ]' &gt;&gt; "${app_bash_script}"
+echo 'then' &gt;&gt; "${app_bash_script}"
+echo '	:' &gt;&gt; "${app_bash_script}"
 # for each share defined in shares.json file add a line to add a shortcut to the Finder sidebar
-jq -r '.[] | ("	sfltool add-item com.apple.LSSharedFileList.FavoriteItems '"'"'file:///mnt/nas/" + .name + "'"'"'")' "${shares_json}" &gt;&gt; $app_bash_script
-echo 'fi' &gt;&gt; $app_bash_script</string>
+jq -r '.[] | ("	sfltool add-item com.apple.LSSharedFileList.FavoriteItems '"'"'file:///mnt/nas/" + .name + "'"'"'")' "${shares_json}" &gt;&gt; "${app_bash_script}"
+echo 'fi' &gt;&gt; "${app_bash_script}"</string>
 					<key>CheckedForUserDefaultShell</key>
 					<true/>
 					<key>inputMethod</key>
