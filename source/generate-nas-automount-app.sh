@@ -46,8 +46,7 @@ echo 'done' >> $app_bash_script
 echo 'echo "/mnt/nas		auto_nas" >> /etc/auto_master' >> $app_bash_script
 
 # for each share defined in shares.json file add a line to add a line to /etc/auto_nas
-jq -r '.[] | ("echo \"" + .name + " -fstype=" + .fstype + " '"'"'" + .protocol + "://" + (.username // "$username") + ":" + (.password // "$password") +"@" + .server + "/" + .path + "'"'"'\" >> /etc/auto_nas")' "${shares_json}" >> $app_bash_script
-
+jq -r '.[] | ("echo \"" + .name + " -fstype=" + .fstype + " \\\"" + .protocol + "://" + (.username // "$username") + ":" + (.password // "$password") +"@" + .server + "/" + .path + "\\\"\" >> /etc/auto_nas")' "${shares_json}" >> $app_bash_script
 # add lines to make auto_nas file root-only
 echo 'chown root /etc/auto_nas' >> $app_bash_script
 echo 'chmod 600 /etc/auto_nas' >> $app_bash_script
